@@ -46,6 +46,9 @@ function loadBk(){
         // 构建echarts图标的series集合
         // 暂时先低效的实现一样，后面统一放到后端去
         for(i = 0; i < bkmcList.length; i++) {
+            //if (i > 10){
+            //    break;
+            //}
             var tmpBKMC = bkmcList[i];
             var tmpNewArr = [];
             // 查找这个题材所有的数据
@@ -56,8 +59,12 @@ function loadBk(){
             }
             // 增加一条线，一类题材
             seriesList.push({
-                data: tmpNewArr,
+                data: tmpNewArr,    // 折线的数据
+                name: tmpBKMC,   // 折线的名称
                 type: 'line'
+                //label: {
+                //    show: true
+                //}
             })
         }
 
@@ -70,7 +77,10 @@ function loadBk(){
             yAxis: {
                 type: 'value'
             },
-            series: seriesList
+            series: seriesList,
+            tooltip : {
+                trigger: 'axis'
+            }
         };
 
         if (option && typeof option === 'object') {
