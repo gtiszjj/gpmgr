@@ -1,6 +1,7 @@
 package com.gis.gp.service.impl;
 
 import com.gis.gp.dao.IBkInfo;
+import com.gis.gp.entity.BkDayInfo;
 import com.gis.gp.entity.BkInfo;
 import com.gis.gp.service.BkInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,10 @@ public class BkInfoServiceImpl implements BkInfoService {
     @Override
     public List<BkInfo> getBkInfo() {
         return bkInfo.getBkInfo();
+    }
+
+    @Override
+    public List<BkDayInfo> getBkDayInfo() {
+        return bkInfo.getBkDayInfo();
     }
 }

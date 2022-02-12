@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>板块领跑情况</title>
+    <script type="text/javascript" src="/js/layui/layui.js"></script>
+    <link rel="stylesheet" href="/js/layui/css/layui.css">
+    <style>
+        .layui-table-cell {
+            height: auto;
+            line-height: 14px;
+        }
+    </style>
+</head>
+<body style="height: 100%; margin: 10px; margin-left: 20%; margin-right: 20%;">
+<div>
+    <table class="layui-table" id="tableMain">
+    </table>
+</div>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+
+        table.render({
+            elem: '#tableMain'
+            , url: '/bk/getBkDayInfo'
+            , cellMinWidth: 150 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cols: [           // 这边cols后面换行要注意，不换行和thymeleaf冲突，会提示cols表达式错误
+                [
+                    {field: 'bkmc', align: 'center',  title: '板块名称', style: 'font-size:12px'},
+                    {field: 'maxtjrq', align: 'center', title: '上次领跑日期', style: 'font-size:12px'},
+                    {field: 'deltadays', align: 'center', title: '间隔天数', style: 'font-size:12px'}
+                ]
+            ]
+        });
+    });
+</script>
+</body>
+</html>

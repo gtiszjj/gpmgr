@@ -8,4 +8,20 @@
         select * from jbxx_bk
         order by tjrq,xh;
     </select>
+
+    <resultMap id="bkDayInfoResultMap" type="com.gis.gp.entity.BkDayInfo">
+    </resultMap>
+
+    <select id="getBkDayInfo" resultMap="bkDayInfoResultMap">
+        select a.bkmc,b.maxtjrq,TIMESTAMPDIFF(DAY,b.maxtjrq,DATE_FORMAT(NOW(), '%Y%m%d')) as deltadays from
+        (
+          select distinct(bkmc) as bkmc from jbxx_bk
+        ) a
+        left join
+        (
+          select max(tjrq) as maxtjrq,bkmc from jbxx_bk where xh &lt; 5 group by bkmc
+        ) b
+        on a.bkmc = b.bkmc
+        order by deltadays desc
+    </select>
 </mapper>
