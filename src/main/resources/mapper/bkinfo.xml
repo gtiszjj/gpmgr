@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gis.gp.dao.IBkInfo">
+    <resultMap id="bkInfoResultMap" type="com.gis.gp.entity.BkInfo">
+    </resultMap>
+
+    <select id="getBkInfo" resultMap="bkInfoResultMap">
+        select * from jbxx_bk
+        order by tjrq,xh;
+    </select>
+</mapper>
