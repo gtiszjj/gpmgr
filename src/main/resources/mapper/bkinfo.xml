@@ -13,15 +13,22 @@
     </resultMap>
 
     <select id="getBkDayInfo" resultMap="bkDayInfoResultMap">
-        select a.bkmc,b.maxtjrq,TIMESTAMPDIFF(DAY,b.maxtjrq,DATE_FORMAT(NOW(), '%Y%m%d')) as deltadays from
-        (
-          select distinct(bkmc) as bkmc from jbxx_bk
-        ) a
-        left join
-        (
-          select max(tjrq) as maxtjrq,bkmc from jbxx_bk where xh &lt; 5 group by bkmc
-        ) b
-        on a.bkmc = b.bkmc
-        order by deltadays desc
+select a.bkmc,a.maxtjrq as pretjrq,b.maxtjrq, b.maxtjrq - a.maxtjrq as pretwodelta,b.deltadays,c.bkmc as mybkmc
+from bkpreresult a
+left join bkmaxlastest b
+on a.bkmc = b.bkmc
+left join bk_my c
+on a.bkmc = c.bkmc
+order by b.deltadays desc, b.maxtjrq desc, c.bkmc desc
+--         select a.bkmc,b.maxtjrq,TIMESTAMPDIFF(DAY,b.maxtjrq,DATE_FORMAT(NOW(), '%Y%m%d')) as deltadays from
+--         (
+--           select distinct(bkmc) as bkmc from jbxx_bk
+--         ) a
+--         left join
+--         (
+--           select max(tjrq) as maxtjrq,bkmc from jbxx_bk where xh &lt; 5 group by bkmc
+--         ) b
+--         on a.bkmc = b.bkmc
+--         order by deltadays desc
     </select>
 </mapper>
